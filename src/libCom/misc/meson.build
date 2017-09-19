@@ -1,5 +1,16 @@
-com_src += files('alarmString.c', 'aToIPAddr.c', 'adjustment.c', 'cantProceed.c', 'epicsConvert.c', 'epicsExit.c', 'epicsStdlib.c', 'epicsString.c', 'truncateFile.c', 'ipAddrToAsciiAsynchronous.cpp', 'epicsUnitTest.c')
-
+com_src += files(
+    'alarmString.c',
+    'aToIPAddr.c',
+    'adjustment.c',
+    'cantProceed.c',
+    'epicsConvert.c',
+    'epicsExit.c',
+    'epicsStdlib.c',
+    'epicsString.c',
+    'truncateFile.c',
+    'ipAddrToAsciiAsynchronous.cpp',
+    'epicsUnitTest.c'
+)
 
 configure_file(
     command: [
@@ -15,4 +26,3 @@ configure_file(
     ],
     output: 'epicsVersion.h'
 )
-#custom_target('epicsVersion.h' command: ['makeEpicsVersion.pl', '-o', ''])

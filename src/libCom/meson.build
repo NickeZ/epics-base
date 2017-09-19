@@ -1,6 +1,4 @@
 com_src = []
-
-subdir('osi')
 com_inc = [
     include_directories(
         'as',
@@ -26,9 +24,10 @@ com_inc = [
         'taskwd',
         'timer',
         'yajl',
-    ),
-    osi_inc,
+    )
 ]
+# epicsTempFile is used by flex
+subdir('osi')
 # Creates yacc tool
 subdir('yacc')
 # Creates flex tool

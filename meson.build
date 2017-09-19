@@ -1,5 +1,8 @@
 project('epics-base', 'c', 'cpp')
 
+# Build first asLib_lex.c with `ninja -C build src/libCom/as/asLib_lex.c`
+# Then build the whole project with `ninja -C build`.
+
 threads = dependency('threads')
 
 add_global_arguments(
@@ -15,11 +18,23 @@ t_a = '-'.join([target_machine.cpu_family(), target_machine.system()])
 
 os_class = target_machine.system()
 
-
-if target_machine.system() == 'linux'
+if compiler_class == 'gcc' or compiler_class == 'clang'
+    # _GNU_SOURCE is set by default in g++/clang++
     add_global_arguments(
         '-D_GNU_SOURCE',
+        language: 'c',
+    )
+    add_global_arguments(
         '-D_DEFAULT_SOURCE',
+        language: ['c', 'cpp'],
+    )
+endif
+
+
+if os_class == 'linux'
+    add_global_arguments(
+        '-DUNIX',
+        '-Dlinux',
         language: ['c', 'cpp'],
     )
     add_global_link_arguments(
@@ -29,12 +44,12 @@ if target_machine.system() == 'linux'
     )
 endif
 
-add_global_arguments(
-    '-D_X86_64_',
-    '-DUNIX',
-    '-Dlinux',
-    language: 'c',
-)
+if target_machine.cpu_family() == 'x86_64'
+    add_global_arguments(
+        '-D_X86_64_',
+        language: ['c', 'cpp'],
+    )
+endif
 
 mv = find_program('mv')
 cp = find_program('cp')

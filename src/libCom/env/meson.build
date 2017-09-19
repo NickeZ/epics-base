@@ -1,5 +1,8 @@
 com_src += files('envSubr.c')
 
+# We have to copy envDefs.h to the build directory because the
+# script below expects it in the current working directory when it
+# is running.
 configure_file(
     command: [
         'cp',

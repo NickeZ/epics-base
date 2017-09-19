@@ -70,4 +70,4 @@ else
 endif
 
 
-osi_inc = include_directories(osi_compiler, osi_machine)
+com_inc += [include_directories(osi_compiler, osi_machine)]
