@@ -11,10 +11,13 @@ yacc_src = files(
     'symtab.c',
     'verbose.c',
     'warshall.c',
-    '../osi/os/posix/epicsTempFile.cpp',
 )
 
-yacc_exe = executable('antelope', sources: yacc_src, include_directories: com_inc)
+yacc_exe = executable(
+    'antelope',
+    sources: [yacc_src, epics_temp_file],
+    include_directories: com_inc
+)
 
 yacc = generator(
     yacc_exe,
