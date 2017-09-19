@@ -1,0 +1,6 @@
+install_data('Copy.pm', install_dir: join_paths(get_option('libdir'), 'perl', 'EPICS'))
+install_data('Getopts.pm', install_dir: join_paths(get_option('libdir'), 'perl', 'EPICS'))
+install_data('macLib.pm', install_dir: join_paths(get_option('libdir'), 'perl', 'EPICS'))
+install_data('Path.pm', install_dir: join_paths(get_option('libdir'), 'perl', 'EPICS'))
+install_data('Readfile.pm', install_dir: join_paths(get_option('libdir'), 'perl', 'EPICS'))
+install_data('Release.pm', install_dir: join_paths(get_option('libdir'), 'perl', 'EPICS'))
