@@ -44,7 +44,10 @@ flex = generator(
     flex_exe,
     output: '@BASENAME@.c',
     arguments: [
-        '-S@SOURCE_DIR@/src/libCom/flex/flex.skel.static',
+        ''.join([
+            '-S',
+            join_paths(meson.current_source_dir(), 'flex.skel.static')
+        ]),
         '-t',
         '@INPUT@',
     ],
