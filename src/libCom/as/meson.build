@@ -1,11 +1,18 @@
-# We would like to implement flex as a Generator but it is missing a 'capture'
-# option right now.
+# Currently it is not possible to depend on a generated file.
 #aslib_lex_c = flex.process('asLib_lex.l')
+#aslib_lex_c_dep = declare_dependency(sources: [aslib_lex_c])
 
 # Instead we implement it as a custom target
+flex_skel = ''.join([
+    '-S',
+    join_paths([
+        meson.source_root(),
+        'src/libCom/flex/flex.skel.static',
+    ]),
+])
 aslib_lex_c = custom_target(
     'asLib_lex.c',
-    command: [flex_exe, '-Ssrc/libCom/flex/flex.skel.static', '-t', '@INPUT@'],
+    command: [flex_exe, flex_skel, '-t', '@INPUT@'],
     capture: true,
     output: 'asLib_lex.c',
     input: 'asLib_lex.l',
@@ -13,9 +20,17 @@ aslib_lex_c = custom_target(
 
 # We would also like to depend on the aslib_lex_c file above but that
 # functionality is also missing.
-aslib_c = yacc.process(
-    'asLib.y',
-    #extra_depends: aslib_lex_c.full_path(),
+#aslib_c = yacc.process(
+#    'asLib.y',
+#    extra_depends: aslib_lex_c,
+#)
+
+aslib_c = custom_target(
+    'asLib.tab.c',
+    command: [yacc_exe, '-b@OUTDIR@/@BASENAME@', '@INPUT@'],
+    output: ['@BASENAME@.tab.c', '@BASENAME@.tab.h'],
+    input: 'asLib.y',
+    depends: aslib_lex_c,
 )
 com_src += [aslib_c] + files('asTrapWrite.c')
 as_includes = ['asLib.h', 'asTrapWrite.h']

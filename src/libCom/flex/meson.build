@@ -32,20 +32,21 @@ flex_exe = executable(
     include_directories: com_inc
 )
 
-configure_file(
-    command: [cp, '@INPUT@', '@OUTPUT@'],
-    input: 'flex.skel.static',
-    output: 'flex.skel.static'
-)
+#flex_static = configure_file(
+#    command: [cp, '@INPUT@', '@OUTPUT@'],
+#    input: 'flex.skel.static',
+#    output: 'flex.skel.static'
+#)
+#
+#flex_skel = files('flex.skel.static')
 
-# This doesn't work. We need a 'capture' argument to the Generator.
-# flex_exe produces its output to stdout instead of to a file.
 flex = generator(
     flex_exe,
-    output: '@PLAINNAME@.yy.c',
+    output: '@BASENAME@.c',
     arguments: [
-        '-S@CURRENT_SOURCE_DIR@/flex.skel.static',
+        '-S@SOURCE_DIR@/src/libCom/flex/flex.skel.static',
         '-t',
-        '@INPUT@'
+        '@INPUT@',
     ],
+    capture: true,
 )
