@@ -2,6 +2,9 @@
 #aslib_lex_c = flex.process('asLib_lex.l')
 #aslib_lex_c_dep = declare_dependency(sources: [aslib_lex_c])
 
+# Use this to test drive the above generator
+#custom_target('hello', input: aslib_lex_c, output: 'hello', command: ['echo', 'hello'], capture: true)
+
 # Instead we implement it as a custom target
 flex_skel = ''.join([
     '-S',
