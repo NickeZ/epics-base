@@ -18,8 +18,6 @@ aslib_lex_c = custom_target(
     input: 'asLib_lex.l',
 )
 
-# We would also like to depend on the aslib_lex_c file above but that
-# functionality is also missing.
 #aslib_c = yacc.process(
 #    'asLib.y',
 #    extra_depends: aslib_lex_c,
