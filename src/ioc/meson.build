@@ -2,6 +2,9 @@ dbcore_inc = include_directories(
     'as',
     'db',
     'dbStatic',
+    'dbtemplate',
+    'misc',
+    'rsrv',
 )
 dbcore_src = files()
 
@@ -16,13 +19,14 @@ subdir('rsrv')
 
 dbcore = library(
     'dbCore',
+    dbcore_src,
     include_directories: [ca_inc, com_inc],
     link_with: [ca, com],
 )
 
-#executable(
-#    'ascheck',
-#    ascheck_src,
-#    include_directories: [ca_inc, com_inc, dbcore_inc],
-#    link_with: [dbcore, ca, com],
-#)
+executable(
+    'ascheck',
+    ascheck_src,
+    include_directories: [ca_inc, com_inc, dbcore_inc],
+    link_with: [com, ca, dbcore],
+)

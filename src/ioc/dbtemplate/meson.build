@@ -17,7 +17,7 @@ dbloadtemplate_c = custom_target(
     'dbLoadTemplate.tab.c',
     command: [yacc_exe, '-b@OUTDIR@/@BASENAME@', '@INPUT@'],
     output: ['@BASENAME@.tab.c', '@BASENAME@.tab.h'],
-    input: 'dbLoadtemplate.y',
+    input: 'dbLoadTemplate.y',
     depends: dbloadtemplate_lex_c,
 )
 
