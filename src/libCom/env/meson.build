@@ -4,13 +4,9 @@ com_src += files('envSubr.c')
 # script below expects it in the current working directory when it
 # is running.
 configure_file(
-    command: [
-        'cp',
-        '@INPUT@',
-        '@OUTPUT@',
-    ],
     input: 'envDefs.h',
     output: 'envDefs.h',
+    configuration: configuration_data()
 )
 
 com_src += configure_file(
@@ -36,3 +32,5 @@ com_src += configure_file(
     ],
     output: 'envData.c'
 )
+
+install_headers('envDefs.h')

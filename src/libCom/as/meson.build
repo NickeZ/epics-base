@@ -35,3 +35,5 @@ aslib_c = custom_target(
 )
 com_src += [aslib_c] + files('asTrapWrite.c')
 as_includes = ['asLib.h', 'asTrapWrite.h']
+
+install_headers('asLib.h', 'asTrapWrite.h')

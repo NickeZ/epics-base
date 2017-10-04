@@ -14,7 +14,6 @@ com_src += files(
     'epicsStackTrace.c',
 )
 
-
 if meson.get_compiler('c').get_id() == 'gcc'
     osi_compiler = join_paths('compiler', 'gcc')
 elif meson.get_compiler('c').get_id() == 'clang'

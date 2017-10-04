@@ -54,6 +54,20 @@ subdir('ring')
 subdir('taskwd')
 subdir('timer')
 subdir('yajl')
-com = library('com', sources: com_src, include_directories: com_inc, dependencies: threads)
+com = library(
+    'com',
+    sources: com_src,
+    include_directories: com_inc,
+    dependencies: threads,
+    install: true,
+)
 
-executable('iocLogServer', sources: 'log/iocLogServer.c', link_with: com, include_directories: com_inc)
+subdir('test')
+
+executable(
+    'iocLogServer',
+    sources: 'log/iocLogServer.c',
+    link_with: com,
+    include_directories: com_inc,
+    install: true,
+)

@@ -24,3 +24,10 @@ com_src += configure_file(
     output: 'errSymTbl.c',
 )
 
+install_headers(
+    'epicsPrint.h',
+    'errMdef.h',
+    'errSymTbl.h',
+    'errlog.h',
+    'error.h',
+)

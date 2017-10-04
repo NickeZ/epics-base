@@ -6,3 +6,5 @@ com_src += files(
     'timerQueueActiveMgr.cpp',
     'timerQueuePassive.cpp',
 )
+
+install_headers('epicsTimer.h')

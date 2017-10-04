@@ -28,3 +28,4 @@ install_data('DBD.pm', install_dir: join_paths(get_option('libdir'), 'perl'))
 
 subdir('EPICS')
 subdir('DBD')
+subdir('test')
