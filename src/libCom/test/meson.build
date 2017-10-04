@@ -96,6 +96,25 @@ foreach t : simple_tests_cpp
     testharness_src += files(''.join([t, '.cpp']))
 endforeach
 
+benchmarks = [
+    'epicsThreadPerform.cpp',
+    'epicsMaxThreads.c',
+    'buckTest.c',
+    #'fdmgrTest.c', # Depends on CA
+    'epicsAtomicPerform.cpp',
+    'cvtFastPerform.cpp',
+]
+
+foreach b : benchmarks
+    name = b.split('.')[0]
+    benchmark(name, executable(
+        name,
+        b,
+        include_directories: [com_inc, include_directories('.')],
+        link_with: com,
+    ))
+endforeach
+
 
 # vxworks/rtems
 #testharness_src += files('epicsRunLibComTests.c')
