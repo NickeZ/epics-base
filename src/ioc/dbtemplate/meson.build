@@ -29,7 +29,7 @@ install_headers(
 dbcore_src += files(
     'dbtoolsIocRegister.c',
 )
-dbcore_src += dbloadtemplate_lex_c
+dbcore_src += dbloadtemplate_c
 
 executable(
     'msi',
