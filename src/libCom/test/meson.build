@@ -21,14 +21,6 @@ test(
     workdir: meson.current_build_dir(),
 )
 
-epics_types_test = executable(
-    'epicsTypesTest',
-    'epicsTypesTest.c',
-    include_directories: [com_inc, include_directories('.')],
-    link_with: com,
-)
-test('epicsTypesTest', epics_types_test)
-
 epics_inline_test = executable(
     'epicsInlineTest',
     'epicsInlineTest1.c',
@@ -40,10 +32,76 @@ epics_inline_test = executable(
 )
 test('epicsInlineTest', epics_inline_test)
 
-epics_calc_test = executable(
+simple_tests_c = [
+    'epicsTypesTest',
+    'epicsMathTest',
+    'epicsMMIOTest',
+    'epicsEllTest',
+    'epicsEnvTest',
+    'epicsErrlogTest',
+    'epicsStdioTest',
+    'epicsStdlibTest',
+    'epicsSockResolveTest',
+    'epicsStringTest',
+    'epicsTimeZoneTest',
+    'epicsThreadOnceTest',
+    'epicsThreadHooksTest',
+    'epicsThreadPoolTest',
+    'epicsExitTest',
+    'ringPointerTest',
+    'ringBytesTest',
+    'epicsSpinTest',
+    'macDefExpandTest',
+    'cvtFastTest',
+    'macLibTest',
+    'taskwdTest',
+    'epicsStackTraceTest',
+]
+
+simple_tests_cpp = [
     'epicsCalcTest',
-    'epicsCalcTest.cpp',
-    include_directories: [com_inc, include_directories('.')],
-    link_with: com,
-)
-test('epicsInlineTest', epics_calc_test)
+    'epicsAlgorithmTest',
+    'epicsTimeTest',
+    'epicsThreadTest',
+    'epicsThreadPriorityTest',
+    'epicsThreadPrivateTest',
+    'epicsTimerTest',
+    'epicsEventTest',
+    'epicsMutexTest',
+    'epicsAtomicTest',
+    'blockingSockTest',
+    'epicsMessageQueueTest',
+    'ipAddrToAsciiTest',
+]
+
+testharness_src = files()
+
+foreach t : simple_tests_c
+    test(t, executable(
+        t,
+        ''.join([t, '.c']),
+        include_directories: [com_inc, include_directories('.')],
+        link_with: com,
+    ))
+    testharness_src += files(''.join([t, '.c']))
+endforeach
+
+foreach t : simple_tests_cpp
+    test(t, executable(
+        t,
+        ''.join([t, '.cpp']),
+        include_directories: [com_inc, include_directories('.')],
+        link_with: com,
+    ), timeout: 120)
+    testharness_src += files(''.join([t, '.cpp']))
+endforeach
+
+
+# vxworks/rtems
+#testharness_src += files('epicsRunLibComTests.c')
+#test('testHarness', executable(
+#    'testHarness',
+#    testharness_src,
+#    include_directories: [com_inc, include_directories('.')],
+#    link_with: com,
+#))
