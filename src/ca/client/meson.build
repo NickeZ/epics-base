@@ -120,4 +120,6 @@ ca_test = executable(
     link_with: [ca, com],
 )
 
+subdir('tools')
+
 #test('ca_test_test', ca_test)

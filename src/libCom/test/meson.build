@@ -32,68 +32,56 @@ epics_inline_test = executable(
 )
 test('epicsInlineTest', epics_inline_test)
 
-simple_tests_c = [
-    'epicsTypesTest',
-    'epicsMathTest',
-    'epicsMMIOTest',
-    'epicsEllTest',
-    'epicsEnvTest',
-    'epicsErrlogTest',
-    'epicsStdioTest',
-    'epicsStdlibTest',
-    'epicsSockResolveTest',
-    'epicsStringTest',
-    'epicsTimeZoneTest',
-    'epicsThreadOnceTest',
-    'epicsThreadHooksTest',
-    'epicsThreadPoolTest',
-    'epicsExitTest',
-    'ringPointerTest',
-    'ringBytesTest',
-    'epicsSpinTest',
-    'macDefExpandTest',
-    'cvtFastTest',
-    'macLibTest',
-    'taskwdTest',
-    'epicsStackTraceTest',
-]
-
-simple_tests_cpp = [
-    'epicsCalcTest',
-    'epicsAlgorithmTest',
-    'epicsTimeTest',
-    'epicsThreadTest',
-    'epicsThreadPriorityTest',
-    'epicsThreadPrivateTest',
-    'epicsTimerTest',
-    'epicsEventTest',
-    'epicsMutexTest',
-    'epicsAtomicTest',
-    'blockingSockTest',
-    'epicsMessageQueueTest',
-    'ipAddrToAsciiTest',
+tests = [
+    'epicsTypesTest.c',
+    'epicsMathTest.c',
+    'epicsMMIOTest.c',
+    'epicsEllTest.c',
+    'epicsEnvTest.c',
+    'epicsErrlogTest.c',
+    'epicsStdioTest.c',
+    'epicsStdlibTest.c',
+    'epicsSockResolveTest.c',
+    'epicsStringTest.c',
+    'epicsTimeZoneTest.c',
+    'epicsThreadOnceTest.c',
+    'epicsThreadHooksTest.c',
+    'epicsThreadPoolTest.c',
+    'epicsExitTest.c',
+    'ringPointerTest.c',
+    'ringBytesTest.c',
+    'epicsSpinTest.c',
+    'macDefExpandTest.c',
+    'cvtFastTest.c',
+    'macLibTest.c',
+    'taskwdTest.c',
+    'epicsStackTraceTest.c',
+    'epicsCalcTest.cpp',
+    'epicsAlgorithmTest.cpp',
+    'epicsTimeTest.cpp',
+    'epicsThreadTest.cpp',
+    'epicsThreadPriorityTest.cpp',
+    'epicsThreadPrivateTest.cpp',
+    'epicsTimerTest.cpp',
+    'epicsEventTest.cpp',
+    'epicsMutexTest.cpp',
+    'epicsAtomicTest.cpp',
+    'blockingSockTest.cpp',
+    'epicsMessageQueueTest.cpp',
+    'ipAddrToAsciiTest.cpp',
 ]
 
 testharness_src = files()
 
-foreach t : simple_tests_c
-    test(t, executable(
+foreach t : tests
+    name = t.split('.')[0]
+    test(name, executable(
+        name,
         t,
-        ''.join([t, '.c']),
-        include_directories: [com_inc, include_directories('.')],
-        link_with: com,
-    ))
-    testharness_src += files(''.join([t, '.c']))
-endforeach
-
-foreach t : simple_tests_cpp
-    test(t, executable(
-        t,
-        ''.join([t, '.cpp']),
         include_directories: [com_inc, include_directories('.')],
         link_with: com,
     ), timeout: 120)
-    testharness_src += files(''.join([t, '.cpp']))
+    testharness_src += files(t)
 endforeach
 
 benchmarks = [
