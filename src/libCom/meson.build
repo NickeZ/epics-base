@@ -55,7 +55,7 @@ subdir('taskwd')
 subdir('timer')
 subdir('yajl')
 com = library(
-    'com',
+    'Com',
     sources: com_src,
     include_directories: com_inc,
     dependencies: threads,

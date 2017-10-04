@@ -1,0 +1,40 @@
+install_headers('casdef.h', 'casEventMask.h', 'caNetAddr.h')
+
+cas_src += files(
+    'caServer.cc',
+    'caServerI.cc',
+    'casCoreClient.cc',
+    'casDGClient.cc',
+    'casStrmClient.cc',
+    'casPV.cc',
+    'casPVI.cc',
+    'casChannel.cc',
+    'casChannelI.cc',
+    'casAsyncIOI.cc',
+    'casAsyncReadIO.cc',
+    'casAsyncReadIOI.cc',
+    'casAsyncWriteIO.cc',
+    'casAsyncWriteIOI.cpp',
+    'casAsyncPVExistIO.cc',
+    'casAsyncPVExistIOI.cpp',
+    'casAsyncPVAttachIO.cc',
+    'casAsyncPVAttachIOI.cpp',
+    'casEventSys.cc',
+    'casMonitor.cc',
+    'casMonEvent.cc',
+    'inBuf.cc',
+    'outBuf.cc',
+    'casCtx.cc',
+    'casEventMask.cc',
+    'pvExistReturn.cc',
+    'pvAttachReturn.cc',
+    'caNetAddr.cc',
+    'beaconTimer.cc',
+    'beaconAnomalyGovernor.cc',
+    'clientBufMemoryManager.cpp',
+    'chanIntfForPV.cc',
+    'channelDestroyEvent.cpp',
+)
+
+subdir('st')
+subdir('mt')
