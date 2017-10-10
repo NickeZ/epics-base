@@ -69,3 +69,18 @@ dbcore_src += files(
     'dbUnitTest.c',
     'dbServer.c',
 )
+
+dbcommon_h = configure_file(
+    command: [
+        dbdtorecordtypeh,
+        '-I', meson.current_source_dir(),
+        '-o', 'dbCommon.h',
+        'dbCommonRecord.dbd'
+    ],
+    output: 'dbCommon.h',
+)
+
+menuscan_h = menu_gen.process('menuScan.dbd')
+
+dbcore_src += dbcommon_h
+dbcore_src += menuscan_h

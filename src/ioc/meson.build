@@ -1,9 +1,11 @@
 dbcore_inc = include_directories(
     'as',
+    'bpt',
     'db',
     'dbStatic',
     'dbtemplate',
     'misc',
+    'registry',
     'rsrv',
 )
 dbcore_src = files()
@@ -20,7 +22,7 @@ subdir('rsrv')
 dbcore = library(
     'dbCore',
     dbcore_src,
-    include_directories: [ca_inc, com_inc],
+    include_directories: [ca_inc, com_inc, dbcore_inc],
     link_with: [ca, com],
 )
 

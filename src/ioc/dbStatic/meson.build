@@ -11,6 +11,7 @@ dblex_c = custom_target(
     command: [flex_exe, flex_skel, '-t', '@INPUT@'],
     output: 'dbLex.c',
     input: 'dbLex.l',
+    capture: true,
 )
 
 dbyacc_c = custom_target(

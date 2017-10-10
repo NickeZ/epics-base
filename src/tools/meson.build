@@ -26,6 +26,29 @@ install_data('useManifestTool.pl', install_dir: get_option('bindir'))
 
 install_data('DBD.pm', install_dir: join_paths(get_option('libdir'), 'perl'))
 
+dbdtomenuh = find_program('dbdToMenuH.pl')
+dbdtorecordtypeh = find_program('dbdToRecordtypeH.pl')
+podremove = find_program('podRemove.pl')
+
+menu_gen = generator(
+    dbdtomenuh,
+    arguments: [
+        '-o', join_paths('@BUILD_DIR@', '@BASENAME@.h'),
+        '@INPUT@',
+        '-I', '.', '..',
+    ],
+    output: '@BASENAME@.h',
+)
+
+pod_gen = generator(
+    podremove,
+    arguments: [
+        '-o', join_paths('@BUILD_DIR@', '@BASENAME@'),
+    ],
+    output: '@BASENAME@',
+)
+
+
 subdir('EPICS')
 subdir('DBD')
 subdir('test')

@@ -34,7 +34,7 @@ dbcore_src += dbloadtemplate_c
 executable(
     'msi',
     'msi.c',
-    include_directories: com_inc,
+    include_directories: [com_inc, dbcore_inc],
     link_with: com,
     install: true,
 )
