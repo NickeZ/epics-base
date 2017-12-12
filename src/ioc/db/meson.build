@@ -72,6 +72,8 @@ dbcore_src += files(
 
 dbcommon_h = configure_file(
     command: [
+        perl,
+        '-I', join_paths(meson.current_source_dir(), '../../tools'),
         dbdtorecordtypeh,
         '-I', meson.current_source_dir(),
         '-o', 'dbCommon.h',
@@ -82,5 +84,7 @@ dbcommon_h = configure_file(
 
 menuscan_h = menu_gen.process('menuScan.dbd')
 
+menupini_h = menu_gen.process('menuPini.dbd')
+
 dbcore_src += dbcommon_h
-dbcore_src += menuscan_h
+dbcore_src += [menuscan_h, menupini_h]

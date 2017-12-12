@@ -31,8 +31,10 @@ dbdtorecordtypeh = find_program('dbdToRecordtypeH.pl')
 podremove = find_program('podRemove.pl')
 
 menu_gen = generator(
-    dbdtomenuh,
+    perl,
     arguments: [
+        '-I', meson.current_source_dir(),
+        dbdtomenuh.path(),
         '-o', join_paths('@BUILD_DIR@', '@BASENAME@.h'),
         '@INPUT@',
         '-I', '.', '..',
@@ -41,8 +43,10 @@ menu_gen = generator(
 )
 
 pod_gen = generator(
-    podremove,
+    perl,
     arguments: [
+        '-I', meson.current_source_dir(),
+        podremove.path(),
         '-o', join_paths('@BUILD_DIR@', '@BASENAME@'),
         '@INPUT@',
     ],
