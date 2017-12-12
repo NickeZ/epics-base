@@ -33,7 +33,7 @@ aslib_c = custom_target(
     input: 'asLib.y',
     depends: aslib_lex_c,
 )
-com_src += [aslib_c] + files('asTrapWrite.c')
+com_src += [aslib_c[0]] + files('asTrapWrite.c')
 as_includes = ['asLib.h', 'asTrapWrite.h']
 
 install_headers('asLib.h', 'asTrapWrite.h')

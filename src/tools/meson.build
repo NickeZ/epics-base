@@ -44,6 +44,7 @@ pod_gen = generator(
     podremove,
     arguments: [
         '-o', join_paths('@BUILD_DIR@', '@BASENAME@'),
+        '@INPUT@',
     ],
     output: '@BASENAME@',
 )
